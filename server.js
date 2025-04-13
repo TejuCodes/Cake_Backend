@@ -15,7 +15,7 @@ const app = express();
 connectDB();
 
 // Middlewares
-app.use(cors());            // Enable CORS
+app.use(cors({ origin: "https://cake-frontend-seven.vercel.app" }));  // Enable CORS
 app.use(express.json());    // Parse incoming JSON data
 
 // Routes
