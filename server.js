@@ -23,8 +23,13 @@ app.use('/api/auth', authRoutes);      // Authentication routes
 app.use('/api/orders', orderRoutes);   // Order routes
 app.use('/api/feedback', feedbackRoutes); // Feedback routes
 
-// Error handler
-app.use(errorHandler);  // Catch all errors
+// ✅ Root route to prevent "Cannot GET /"
+app.get('/', (req, res) => {
+  res.send('🎂 Cake Shop API is running!');
+});
+
+// Error handler (should be placed after all routes)
+app.use(errorHandler);
 
 // Server listening
 const PORT = process.env.PORT || 5000;
