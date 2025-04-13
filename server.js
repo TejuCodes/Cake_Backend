@@ -15,8 +15,13 @@ const app = express();
 connectDB();
 
 // Middlewares
-app.use(cors({ origin: "https://cake-frontend-seven.vercel.app" }));  // Enable CORS
-app.use(express.json());    // Parse incoming JSON data
+app.use(cors({ 
+  origin: "https://cake-frontend-woad.vercel.app", // Update with the correct frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
+  credentials: true, // Allow credentials (cookies, etc.)
+}));  
+app.use(express.json());  // Parse incoming JSON data
 
 // Routes
 app.use('/api/auth', authRoutes);      // Authentication routes
