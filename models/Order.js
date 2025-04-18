@@ -1,4 +1,3 @@
-
 const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema(
@@ -12,8 +11,9 @@ const orderSchema = new mongoose.Schema(
     mobileNumber: {
       type: String,
       required: true,
-      match: /^[6-9]\d{9}$/  
+      match: /^[6-9]\d{9}$/
     },
+   
   },
   { timestamps: true }
 );

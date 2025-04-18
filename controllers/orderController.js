@@ -1,6 +1,6 @@
 const Order = require('../models/Order');
 
-// Get all orders
+// Ellaa orders-ah get pannum function
 const getAllOrders = async (req, res, next) => {
   try {
     const orders = await Order.find().sort({ createdAt: -1 });
@@ -10,7 +10,7 @@ const getAllOrders = async (req, res, next) => {
   }
 };
 
-// Get orders by user email
+// Oru user-oda orders-ah get pannum function
 const getUserOrders = async (req, res, next) => {
   try {
     const orders = await Order.find({ useremail: req.query.useremail });
@@ -20,28 +20,23 @@ const getUserOrders = async (req, res, next) => {
   }
 };
 
-// Create new order(s)
+// Puthu order create pannum function
 const createOrder = async (req, res, next) => {
   try {
-    const ordersData = Array.isArray(req.body) ? req.body : [req.body];
-    const orders = await Order.insertMany(ordersData);
-    res.status(201).json({
-      success: true,
-      message: orders.length > 1 ? 'Orders created successfully' : 'Order created successfully',
-      orders
-    });
+    const order = await Order.create(req.body);
+    res.status(201).json({ success: true, order });
   } catch (err) {
     next(err);
   }
 };
 
-// Update order status
+// Order status-ah update pannum function
 const updateOrderStatus = async (req, res, next) => {
   try {
     const order = await Order.findByIdAndUpdate(
       req.params.id,
       { status: req.body.status },
-      { new: true }
+      { new: true }  // Updated document return pannu
     );
     res.json({ success: true, order });
   } catch (err) {
@@ -49,7 +44,7 @@ const updateOrderStatus = async (req, res, next) => {
   }
 };
 
-// Delete order
+// Order-ah delete pannum function
 const deleteOrder = async (req, res, next) => {
   try {
     await Order.findByIdAndDelete(req.params.id);
